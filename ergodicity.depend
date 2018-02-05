@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1517813342 source:c:\users\conan\desktop\parallel_conference_code\ergodicity\main.c
+	"ergodicity.h"
+	<stdio.h>
+	<complex.h>
+
+1517810862 c:\users\conan\desktop\parallel_conference_code\ergodicity\ergodicity.h
+	<stdint.h>
+
