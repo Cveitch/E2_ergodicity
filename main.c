@@ -10,122 +10,65 @@
 #include <stdio.h>
 #include <complex.h>
 #include <math.h>
-
-
+#include "ergodic_controller.h"
+#include "domain.h"
+#include "distribution.h"
+#include "domain.c"
+#include "distribution.c"
+#include "ergodic_controller.c"
 
 
 int main(void) {
 
-	printf("hello world");
-
-    // Constructing domain 1.5mx1.5m, 10x10 cells
+    // Domain, Distribution, and ergodic controller values.
+    double dist_r = 2;
+    double x_centre = 75;
+    double y_centre = 75;
     double domain_min[]   =   {0, 0, -M_PI};
-    double domain_max[]   =   {1.5,1.5, M_PI};
-    double domain_cells[] =   {10, 10, 10};
-
+    double domain_max[]   =   {150,150, M_PI};
+    uint32_t domain_cells[] =   {10, 10, 10};
+    // Construct E2.
     three_d_domain E2_;
-    three_d_domain* E2=&E2_;
+    three_d_domain* E2 = &E2_;
     build_E2(E2, 3, domain_min, domain_max, domain_cells);
-
-    uint32_t distribution_[dist_x][dist_y];
-    uint32_t* distribution = &distribution_;
-
+    // Construct circular distribution over E2
+    double distribution_[dist_x][dist_y] = {0};
+    double (*distribution)[dist_y] = &distribution_;
     build_distribution(E2, dist_r, x_centre, y_centre, distribution);
 
+//    int n; int m;
+//    for(n=0; n < dist_x; n++){
+//        for(m=0; m < dist_y; m++){
+//            printf("%lf ", distribution[n][m]);
+//        }
+//        printf("\n");
+//    }
+
+    E2_e_controller EC_;
+    E2_e_controller* EC = &EC_;
+    E2_controller(EC);
+    double phi_[dist_x][dist_y][dist_z] = {0};
+    double (*phi)[dist_y][dist_z] = &phi_;
+    double complex phik_[K][K][K] = {0};
+    double complex (*phik)[K][K] = &phik_;
+
+    get_phi_coefficients(EC, E2, phi, phik);
+
+//    int m = 0; int n = 0; int p;
+//    for(n=0; n < 5; n++){
+//        for(m=0; m < 5; m++){
+//                for(p=0; p < 5; p++){
+//                    printf("%lf ", phik[n][m][p]);
+//        }
+//        printf("\n");
+//        }
+//        printf("\n");
+//    }
+
+    double complex ck_[K][K][K] = {0};
+    double complex (*ck)[K][K] = &ck_;
 
 	return 0;
 }
 
 
-
-void get_phi_coefficients() {
-
-}
-
-
-
-
-
-
-void build_controller(uint32_t k, struct three_d_domain E2 ) {
-
-}
-
-
-
-
-// For now, all of this is hardcoded to three dimensions.
-// This is a bare metal restriction, since we can't use malloc.
-void build_E2(three_d_domain* E2, uint32_t dim, double min[], double max[], double cells[]) {
-	uint32_t i = 0;
-	E2->x_len = max[i] - min[i];
-	E2->x_cell_len = (max[i] - min[i]) / cells[i];
-	E2->x_min = min[i];
-	E2->x_max = max[i];
-	E2->x_cell = cells[i];
-
-	i++;
-	E2->y_len = max[i] - min[i];
-	E2->y_cell_len = (max[i] - min[i]) / cells[i];
-	E2->y_min = min[i];
-	E2->y_max = max[i];
-	E2->y_cell = cells[i];
-
-	i++;
-	E2->z_len = max[i] - min[i];
-	E2->z_cell_len = (max[i] - min[i]) / cells[i];
-	E2->z_min = min[i];
-	E2->z_max = max[i];
-	E2->z_cell = cells[i];
-
-	E2->cell_size = 1.0;
-	int j;
-	for (j = 0; j < i; j++) {
-		E2->cell_size *= (max[j] - min[j]) / cells[j];
-	}
-}
-
-
-
-
-void build_distribution(three_d_domain* E2, uint32_t radius, uint32_t centre_x, uint32_t centre_y, uint32_t *distribution){
-	uint32_t r2 = radius * radius;
-	//distribution[x][y];
-
-}
-
-
-
-
-
-
-
-
-//
-//
-//
-//
-//
-////HOW TO USE COMPLEX.H
-////
-////double complex z1 = 1.0 + 3.0 * I;
-////double complex z2 = 1.0 - 4.0 * I;
-////
-////printf("Working with complex numbers:\n\v");
-////
-////printf("Starting values: Z1 = %.2f + %.2fi\tZ2 = %.2f %+.2fi\n", creal(z1), cimag(z1), creal(z2), cimag(z2));
-////
-////double complex sum = z1 + z2;
-////printf("The sum: Z1 + Z2 = %.2f %+.2fi\n", creal(sum), cimag(sum));
-////
-////double complex difference = z1 - z2;
-////printf("The difference: Z1 - Z2 = %.2f %+.2fi\n", creal(difference), cimag(difference));
-////
-////double complex product = z1 * z2;
-////printf("The product: Z1 x Z2 = %.2f %+.2fi\n", creal(product), cimag(product));
-////
-////double complex quotient = z1 / z2;
-////printf("The quotient: Z1 / Z2 = %.2f %+.2fi\n", creal(quotient), cimag(quotient));
-////
-////double complex conjugate = conj(z1);
-////printf("The conjugate of Z1 = %.2f %+.2fi\n", creal(conjugate), cimag(conjugate));

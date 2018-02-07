@@ -7,3 +7,39 @@
 1517810862 c:\users\conan\desktop\parallel_conference_code\ergodicity\ergodicity.h
 	<stdint.h>
 
+1517987732 source:c:\users\conan\desktop\parallel_conference_code\ergodicity\e2_ergodicity\main.c
+	"ergodicity.h"
+	<stdio.h>
+	<complex.h>
+	<math.h>
+	"ergodic_controller.h"
+	"domain.h"
+	"distribution.h"
+	"domain.c"
+	"distribution.c"
+	"ergodic_controller.c"
+
+1517981717 c:\users\conan\desktop\parallel_conference_code\ergodicity\e2_ergodicity\ergodicity.h
+	<stdint.h>
+	"domain.h"
+
+1517973783 c:\users\conan\desktop\parallel_conference_code\ergodicity\e2_ergodicity\domain.h
+
+1517988676 c:\users\conan\desktop\parallel_conference_code\ergodicity\e2_ergodicity\ergodic_controller.h
+
+1517974222 c:\users\conan\desktop\parallel_conference_code\ergodicity\e2_ergodicity\distribution.h
+
+1517973089 source:c:\users\conan\desktop\parallel_conference_code\ergodicity\e2_ergodicity\ergodicity.h
+	<stdint.h>
+	"domain.h"
+
+1517973006 c:\users\conan\desktop\parallel_conference_code\ergodicity\e2_ergodicity\domain.c
+	"domain.h"
+
+1517984303 c:\users\conan\desktop\parallel_conference_code\ergodicity\e2_ergodicity\distribution.c
+	"distribution.h"
+
+1517988698 c:\users\conan\desktop\parallel_conference_code\ergodicity\e2_ergodicity\ergodic_controller.c
+	"complex.h"
+	"ergodic_controller.h"
+
