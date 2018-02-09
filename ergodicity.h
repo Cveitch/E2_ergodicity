@@ -17,14 +17,14 @@
 // assign values to multi-dim array due to bare metal restrictions on
 // malloc.
 #define dist_x 10
-#define dist_y 10   // Number of discrete squares domain cut into per axis.
+#define dist_y 10       // Number of discrete squares domain cut into per axis.
 #define dist_z 10
 
-#define K 5         // Number of Fourier coefficients.
+#define K 5             // Number of Fourier coefficients.
 
-#define TIME 3      // Total number of states
+#define TIME 100        // Total number of states
 
-#define num_agents  // Number of agents in system
+#define num_agents  1   // Number of agents in system
 
 
 

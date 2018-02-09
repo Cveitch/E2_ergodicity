@@ -63,16 +63,6 @@ int main(void) {
     uint32_t time_elapsed = 3;
     get_ck_coefficients(EC, ck, trajectory, time_elapsed);
 
-    uint32_t i;
-    for(i=0; i < TIME; i++){
-        printf("%lf ", trajectory[i][0]);
-        printf("%lf ", trajectory[i][1]);
-        printf("%lf ", trajectory[i][2]);
-        printf("\n");
-    }
-    printf(" \n");
-
-
     // Use the ergodicity metric to compare trajectory
     // and distribution coefficients
     double lambda_[K][K][K] = {0};
